@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div style="margin-top: 100px;" class="row">
+    <div class="row statisticBlock">
         <div class="d-none" id="groupData">
             {{ json_encode($groupByDate) }}
         </div>

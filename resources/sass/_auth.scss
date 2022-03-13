@@ -1,0 +1,35 @@
+.text-center {
+    text-align: center!important;
+}
+.form-signin {
+    background-color: lightsteelblue;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    margin-top: 110px;
+}
+
+//@media (min-width: 768px) {
+//    .bd-placeholder-img-lg {
+//        font-size: 3.5rem;
+//    }
+//}
+.input_reset_password{
+    margin-bottom: 10px;
+}
+.reset_password_label{
+    width: 400px;
+    margin-left: -50px;
+}
+.alertErrors{
+    margin-top: 10px;
+}
+
+.inputPassword{
+    margin-top: 10px;
+}
+.InputEmailLabel{
+    text-align: left;
+}

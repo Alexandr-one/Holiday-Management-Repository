@@ -21,6 +21,9 @@
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ \Illuminate\Support\Facades\URL::asset('css/app.css') }}">
+    <script src="{{ \Illuminate\Support\Facades\URL::asset('js/app.js') }}"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">

@@ -5,15 +5,6 @@
 @endsection
 
 @section('content')
-    <style>
-        .mainUsersContainerBlock {
-            margin-top: 80px;
-        }
-
-        .mainUsersTable {
-            margin-top: 40px;
-        }
-    </style>
     <div class="container mainUsersContainerBlock">
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -190,7 +181,7 @@
                 <form method="post" class="row g-3 needs-validation" action="{{ route('delete_user') }}" novalidate>
                     @csrf
                     <div class="modal-body">
-                        <div class="content" style="margin-left: 25px;margin-right: 15px;">
+                        <div class="content modalDeleteCheck">
                             <input type="hidden" class="user_delete_id" name="user_id">
                             <p>Вы уверены, что хотите удалить пользователя?</p>
                         </div>
@@ -253,7 +244,7 @@
                 <form method="post" class="row g-3 needs-validation" action="{{ route('unblock.user') }}" novalidate>
                     @csrf
                     <div class="modal-body">
-                        <div class="content" style="margin-left: 25px;margin-right: 15px;">
+                        <div class="content modalDeleteCheck">
                             <input type="hidden" class="user_unblock_id" name="user_id">
                             <p>Вы уверены, что хотите разблокировать пользователя?</p>
                         </div>
@@ -283,7 +274,7 @@
                     @csrf
                     <div class="modal-body">
                         <input class="status_id" value="" name="id" type="hidden">
-                        <select class="form-select" name="status" style="width:300px;margin-top: 10px;"
+                        <select class="form-select modalChangeStatus" name="status"
                                 aria-label="Default select example" required>
                             <option selected disabled value="">Выберите роль</option>
                             <option value="{{ \App\Classes\UserRolesEnum::EMPLOYEE }}">Сотрудник</option>
@@ -317,10 +308,10 @@
                 </div>
                 <form method="post" class="row g-3 needs-validation" action="{{ route('add.user') }}" novalidate>
                     @csrf
-                    <div class="modal-body" style="margin-left: 20px;">
+                    <div class="modal-body modalAddBlock">
                         <div>
-                            <input name="email" placeholder="Введите почту" type="email" style="width: 300px;"
-                                   class="form-control" required>
+                            <input name="email" placeholder="Введите почту" type="email"
+                                   class=" emailInput form-control" required>
                             <div class="valid-feedback">
                                 Отлично
                             </div>
@@ -329,7 +320,7 @@
                             </div>
                         </div>
                         <div>
-                            <select class="form-select" name="post_id" style="width:300px;margin-top: 10px;"
+                            <select class="form-select chosePositionSelector" name="post_id"
                                     aria-label="Default select example" required>
                                 <option selected disabled value="">Выберите должность</option>
                                 @foreach($posts as $post)
@@ -344,7 +335,7 @@
                             </div>
                         </div>
                         <div>
-                            <select class="form-select" name="role" style="width:300px;margin-top: 10px;"
+                            <select class="form-select chosePositionSelector" name="role"
                                     aria-label="Default select example" required>
                                 <option selected disabled value="">Выберите роль</option>
                                 <option value="{{ \App\Classes\UserRolesEnum::EMPLOYEE }}">Сотрудник</option>
@@ -384,7 +375,7 @@
                     <div class="modal-body">
                         <div class="col-md-4">
                             <input class="change_id" type="hidden" name="user_id">
-                            <select class="form-select" name="position_id" style="width:300px;"
+                            <select class="form- emailInput" name="position_id"
                                     aria-label="Default select example" required>
                                 <option selected disabled value="">Выберите должность</option>
                                 @foreach($posts as $post)
@@ -453,25 +444,6 @@
             });
         });
 
-    </script>
-    <script>
-        (function () {
-            'use strict'
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
     </script>
 @endsection
 

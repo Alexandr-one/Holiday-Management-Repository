@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div style="margin-top: 100px;" class="row">
+    <div class="row MainBlock">
         <div class="d-none" id="groupData">
             {{ json_encode($groupByDate) }}
         </div>
@@ -85,6 +85,11 @@
             </div>
         @endforeach
     </div>
+    <style>
+        .MainBlock{
+            margin-top: 100px;
+        }
+    </style>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
     <script>
         $(document).ready(function() {
@@ -114,10 +119,6 @@
                     }
                 });
             })
-            // data.forEach(item => {
-            //     console.log(item)
-            // })
-
         });
     </script>
 

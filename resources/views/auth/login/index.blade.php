@@ -39,7 +39,7 @@
         @enderror
 
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="пароль" style="margin-top: 10px;">
+            <input type="password" class="form-control inputPassword" id="floatingPassword" name="password" placeholder="пароль">
             <label for="floatingPassword">Пароль</label>
         </div>
 

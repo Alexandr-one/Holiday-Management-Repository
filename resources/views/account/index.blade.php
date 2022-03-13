@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container" style="margin-top: 100px;">
+    <div class="container mainAccountBlock">
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <ul>
@@ -208,27 +208,5 @@
 
             });
         });
-        (function () {
-            'use strict'
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
     </script>
-    <style>
-        .buttonChangeUserSubmit {
-            margin-top: 50px;
-        }
-    </style>
 @endsection

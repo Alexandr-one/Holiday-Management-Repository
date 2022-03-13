@@ -19371,6 +19371,130 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/Calendar.js":
+/*!**********************************!*\
+  !*** ./resources/js/Calendar.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var cal = document.getElementById('calendar');
+var hdr = '<div>пн</div><div>вт</div><div>ср</div><div>чт</div><div>пт</div><div>сб</div><div>вс</div>';
+
+var getTitle = function getTitle(d, y) {
+  return "<div class=\"title\">".concat(d + 1 + '.' + y, "</div>");
+};
+
+var first_date = '';
+var sec_date = '';
+var id = document.querySelector('.user_id').value;
+$.ajax({
+  url: 'http://localhost:8000/api/application/',
+  type: "GET",
+  data: {
+    user_id: id
+  },
+  success: function success(data) {
+    first_date = data[0][0]['date_start'];
+    sec_date = data[1][data[1].length - 1]['date_finish'];
+    var dStart = new Date("".concat(first_date));
+    var dEnd = new Date("".concat(sec_date));
+    var ds = new Date(dStart);
+    var de = new Date(dEnd);
+    ds.setDate(1);
+    de.setMonth(dEnd.getMonth() + 1, 1);
+    de.setHours(0, 0, 0, 0);
+    var date = [];
+    var eMonth = null;
+
+    for (var i = 0; i < data[0].length; i++) {
+      date.push([data[0][i]['date_start'], data[0][i]['date_finish'], data[0][i]['status']]);
+    }
+
+    while (ds < de) {
+      var day = ds.getDate();
+      var dayOfWeek = ds.getDay() == 0 ? 7 : ds.getDay();
+      var dayDiv = document.createElement('div');
+
+      if (day == 1) {
+        cal.appendChild(eMonth = document.createElement('div'));
+        eMonth.innerHTML = getTitle(ds.getMonth(), ds.getFullYear()) + hdr;
+        dayDiv.style.gridColumn = dayOfWeek;
+      }
+
+      for (var _i = 0; _i < date.length; _i++) {
+        var dateStart = new Date("".concat(date[_i][0]));
+        var dateFinish = new Date("".concat(date[_i][1]));
+        var status = date[_i][2];
+        dayDiv.innerText = day;
+
+        if (ds >= dateStart && ds <= dateFinish) {
+          if (status == 'CONFIRMED') {
+            if (dayDiv.style.background == 'green') {
+              dayDiv.style.background = 'green';
+            } else if (dayDiv.style.background == 'red') {
+              dayDiv.style.background = 'linear-gradient(green 50%, red 50%)';
+            } else if (dayDiv.style.background == 'orange') {
+              dayDiv.style.background = 'linear-gradient(green 50%, orange 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(green 50%, red 50%)') {
+              dayDiv.style.background = 'linear-gradient(green 50%, red 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(green 50%, orange 50%)') {
+              dayDiv.style.background = 'linear-gradient(green 50%, orange 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(red 50%, orange 50%)') {
+              dayDiv.style.background = 'linear-gradient(red 25%, green 50%, orange 80%)';
+            } else if (dayDiv.style.background == 'linear-gradient(red 25%, green 50%, orange 80%)') {
+              dayDiv.style.background = 'linear-gradient(red 25%, green 50%, orange 80%)';
+            } else {
+              dayDiv.style.background = 'green';
+            }
+          } else if (status == 'WAITING') {
+            if (dayDiv.style.background == 'orange') {
+              dayDiv.style.background = 'orange';
+            } else if (dayDiv.style.background == 'red') {
+              dayDiv.style.background = 'linear-gradient(red 50%, orange 50%)';
+            } else if (dayDiv.style.background == 'green') {
+              dayDiv.style.background = 'linear-gradient(green 50%, orange 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(red 50%, orange 50%)') {
+              dayDiv.style.background = 'linear-gradient(red 50%, orange 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(green 50%, orange 50%)') {
+              dayDiv.style.background = 'linear-gradient(green 50%, orange 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(green 50%, red 50%)') {
+              dayDiv.style.background = 'linear-gradient(red 25%, green 50%, orange 80%)';
+            } else if (dayDiv.style.background == 'linear-gradient(red 25%, green 50%, orange 80%)') {
+              dayDiv.style.background = 'linear-gradient(red 25%, green 50%, orange 80%)';
+            } else {
+              dayDiv.style.background = 'orange';
+            }
+          } else if (status == 'REFUSED') {
+            if (dayDiv.style.background == 'red') {
+              dayDiv.style.background = 'red';
+            } else if (dayDiv.style.background == 'green') {
+              dayDiv.style.background = 'linear-gradient(green 50%, red 50%)';
+            } else if (dayDiv.style.background == 'orange') {
+              dayDiv.style.background = 'linear-gradient(red 50%,orange 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(green 50%, red 50%)') {
+              dayDiv.style.background = 'linear-gradient(green 50%, red 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(red 50%, orange 50%)') {
+              dayDiv.style.background = 'linear-gradient(red 50%, orange 50%)';
+            } else if (dayDiv.style.background == 'linear-gradient(green 50%, orange 50%)') {
+              dayDiv.style.background = 'linear-gradient(red 25%, green 50%, orange 80%)';
+            } else if (dayDiv.style.background == 'linear-gradient(red 25%, green 50%, orange 80%)') {
+              dayDiv.style.background = 'linear-gradient(red 25%, green 50%, orange 80%)';
+            } else {
+              dayDiv.style.background = 'red';
+            }
+          }
+        }
+      }
+
+      eMonth.appendChild(dayDiv);
+      ds.setDate(ds.getDate() + 1);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin.js":
 /*!*******************************!*\
   !*** ./resources/js/admin.js ***!
@@ -19436,6 +19560,12 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./admin */ "./resources/js/admin.js");
 
+__webpack_require__(/*! ./director */ "./resources/js/director.js");
+
+__webpack_require__(/*! ./Calendar */ "./resources/js/Calendar.js");
+
+__webpack_require__(/*! ./statistic */ "./resources/js/statistic.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -19470,6 +19600,96 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/director.js":
+/*!**********************************!*\
+  !*** ./resources/js/director.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.updateApplication').click(function () {
+    var id = $(this).data('id');
+    console.log(id);
+    document.querySelector('.update_application_id').value = id;
+    $.ajax({
+      url: 'http://localhost:8000/api/application/' + id,
+      type: "GET",
+      success: function success(data) {
+        document.querySelector('.date_start_value').value = data['date_start'];
+        document.querySelector('.date_finish_value').value = data['date_finish'];
+        document.querySelector('.comment').value = data['comment'];
+        console.log(data);
+      }
+    });
+  });
+  $('.refuse').click(function () {
+    var id = $(this).data('id');
+    document.querySelector('.refuse_app_id').value = id;
+  });
+  $('.confirm').click(function () {
+    var id = $(this).data('id');
+    document.querySelector('.confirm_app_id').value = id;
+  }); // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+  (function () {
+    'use strict'; // Fetch all the forms we want to apply custom Bootstrap validation styles to
+
+    var forms = document.querySelectorAll('.needs-validation'); // Loop over them and prevent submission
+
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+});
+
+/***/ }),
+
+/***/ "./resources/js/statistic.js":
+/*!***********************************!*\
+  !*** ./resources/js/statistic.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var data = $('#groupData');
+  data = JSON.parse(data[0].innerText);
+  var max_days = document.querySelector('.max_days').value;
+  Object.keys(data).forEach(function (item) {
+    var countDays = 0;
+    data[item].forEach(function (object) {
+      countDays += object.number_of_days;
+    });
+    var ctx = $("#chart-line-".concat(item));
+    var myLineChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ["Использованно", "Не использованно"],
+        datasets: [{
+          data: [countDays, max_days - countDays],
+          backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)"]
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "\u0423\u0447\u0435\u0442 \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0438 \u0437\u0430 ".concat(item, " \u0433\u043E\u0434")
+        }
+      }
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -19488,8 +19708,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Конченный язык\OpenServer\domains\Holiday_Management_System\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Конченный язык\OpenServer\domains\Holiday_Management_System\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! W:\domains\Holiday_Management_System\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! W:\domains\Holiday_Management_System\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
